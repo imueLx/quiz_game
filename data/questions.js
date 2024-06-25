@@ -35,4 +35,9 @@ export const questions = [
     options: ["Vitamin A", "Vitamin B", "Vitamin C", "Vitamin D"],
     answer: "Vitamin D",
   },
+  {
+    question: "Si Aaron ba Ay Pogi?",
+    options: ["Oo", "Hindi", "Pwede na", "Pangit"],
+    answer: "Pangit",
+  },
 ];
