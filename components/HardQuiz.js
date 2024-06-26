@@ -122,18 +122,7 @@ const HardQuiz = ({ questions, onFinish, setNumber, mode }) => {
   };
 
   const handleRestart = () => {
-    setCurrentQuestionIndex(0);
-    setSelectedAnswer(null);
-    setShowExplanation(false);
-    setCorrectAnswer(null);
-    setWrongAnswer(null);
-    setAnswers([]);
-    setLives(3);
-    setTimeLeft(30);
-    setToastShown(false);
-    if (timerRef.current) {
-      clearInterval(timerRef.current);
-    }
+    window.location.reload();
   };
 
   const handleTryAgain = () => {
