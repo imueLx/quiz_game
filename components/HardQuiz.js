@@ -122,7 +122,28 @@ const HardQuiz = ({ questions, onFinish, setNumber, mode }) => {
   };
 
   const handleRestart = () => {
-    window.location.reload();
+    setCurrentQuestionIndex(0);
+    setSelectedAnswer(null);
+    setShowExplanation(false);
+    setCorrectAnswer(null);
+    setWrongAnswer(null);
+    setAnswers([]);
+    setLives(3);
+    setTimeLeft(30);
+    setToastShown(false);
+    if (timerRef.current) {
+      clearInterval(timerRef.current);
+    }
+    timerRef.current = setInterval(() => {
+      setTimeLeft((prevTime) => {
+        if (prevTime <= 1) {
+          clearInterval(timerRef.current);
+          handleCheckAnswer();
+          return 0;
+        }
+        return prevTime - 1;
+      });
+    }, 1000);
   };
 
   const handleTryAgain = () => {
