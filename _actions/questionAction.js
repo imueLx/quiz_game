@@ -26,7 +26,7 @@ export async function getHardQuestions(level) {
     await connectDB();
     let questions;
 
-    if (level === "1") {
+    if (level === "1" || level === "4") {
       // Fetch questions without a level
       questions = await HardQuestionModel.find({
         $or: [{ level: { $exists: false } }, { level: null }],
