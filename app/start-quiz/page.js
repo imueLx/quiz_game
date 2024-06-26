@@ -2,9 +2,10 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { getQuestions } from "../../_actions/questionAction";
+import { getQuestions, getHardQuestions } from "../../_actions/questionAction";
 import { submitScore } from "../../_actions/scoreAction";
 import Quiz from "../../components/Quiz";
+import HardQuiz from "../../components/HardQuiz"; // Import HardQuiz component
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Link from "next/link";
@@ -15,13 +16,22 @@ const StartQuizPage = () => {
   const [score, setScore] = useState(0);
   const [nickname, setNickname] = useState("");
   const [level, setLevel] = useState("1"); // Default level
+  const [difficulty, setDifficulty] = useState("easy"); // Default difficulty
   const [isNicknameEntered, setIsNicknameEntered] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
     const fetchQuestions = async () => {
       try {
-        const response = await getQuestions(level);
+        let response;
+        if (difficulty === "hard") {
+          console.log("hard mode");
+          response = await getHardQuestions();
+        } else {
+          console.log("easy mode");
+          response = await getQuestions(level, difficulty);
+        }
+        console.log(response.questions);
         setQuestions(response.questions);
       } catch (error) {
         console.error("Error fetching questions:", error);
@@ -31,10 +41,9 @@ const StartQuizPage = () => {
     if (isNicknameEntered) {
       fetchQuestions();
     }
-  }, [isNicknameEntered, level]);
+  }, [isNicknameEntered, level, difficulty]);
 
   const handleFinish = (finalScore) => {
-    // Calculate score as a percentage
     const scorePercentage = Math.round((finalScore / questions.length) * 100);
     setScore(scorePercentage);
     setIsQuizFinished(true);
@@ -64,7 +73,6 @@ const StartQuizPage = () => {
         draggable: true,
         progress: undefined,
       });
-      // Wait for 3 seconds before navigating
       setTimeout(() => {
         router.push("/");
       }, 3000);
@@ -145,8 +153,10 @@ const StartQuizPage = () => {
                 </Link>
               </div>
             </div>
-          ) : (
+          ) : difficulty === "easy" ? (
             <Quiz questions={questions} onFinish={handleFinish} />
+          ) : (
+            <HardQuiz questions={questions} onFinish={handleFinish} />
           )
         ) : (
           <div className="text-center text-white text-xl">Loading...</div>
@@ -171,17 +181,30 @@ const StartQuizPage = () => {
             />
           </label>
           <label className="block mt-4">
-            <span className="text-gray-700">Select Level</span>
+            <span className="text-gray-700">Difficulty</span>
             <select
-              value={level}
-              onChange={(e) => setLevel(e.target.value)}
+              value={difficulty}
+              onChange={(e) => setDifficulty(e.target.value)}
               className="mt-1 block w-full p-3 border border-gray-300 rounded-lg focus:border-teal-500 focus:ring focus:ring-teal-500 focus:ring-opacity-50"
             >
-              <option value="1">Level 1</option>
-              <option value="2">Level 2</option>
-              <option value="3">Level 3</option>
+              <option value="easy">Easy Mode</option>
+              <option value="hard">Hard Mode</option>
             </select>
           </label>
+          {difficulty !== "hard" && (
+            <label className="block mt-4">
+              <span className="text-gray-700">Choose Set of Questions</span>
+              <select
+                value={level}
+                onChange={(e) => setLevel(e.target.value)}
+                className="mt-1 block w-full p-3 border border-gray-300 rounded-lg focus:border-teal-500 focus:ring focus:ring-teal-500 focus:ring-opacity-50"
+              >
+                <option value="1">Set One</option>
+                <option value="2">Set Two</option>
+                <option value="3">Set Three</option>
+              </select>
+            </label>
+          )}
           <button
             onClick={handleNicknameSubmit}
             className="mt-6 w-full bg-teal-500 text-white py-3 px-6 rounded-lg hover:bg-teal-600 transition duration-200"
