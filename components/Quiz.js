@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { FaLightbulb, FaArrowLeft, FaArrowRight } from "react-icons/fa";
 
-const Quiz = ({ questions, onFinish }) => {
+const Quiz = ({ questions, onFinish, setNumber, mode }) => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedAnswers, setSelectedAnswers] = useState({});
   const [timer, setTimer] = useState(30); // 30 seconds for each question
@@ -66,6 +66,10 @@ const Quiz = ({ questions, onFinish }) => {
     }, 0);
   };
 
+  // Convert setNumber to human-readable format
+  const setDisplayName = setNumber === 1 ? "Set One" : `Set ${setNumber}`;
+  const modeDisplayName = mode.charAt(0).toUpperCase() + mode.slice(1);
+
   return (
     <div className="relative max-w-4xl w-full bg-white rounded-lg shadow-md p-6 sm:py-8 sm:px-12 space-y-4 overflow-y-auto max-h-[calc(100vh-2rem)]">
       <div className="flex justify-between items-center mb-4">
@@ -74,6 +78,14 @@ const Quiz = ({ questions, onFinish }) => {
         </div>
         <div className="text-lg font-semibold text-gray-800">
           Time left: {timer}s
+        </div>
+      </div>
+      <div className="flex justify-between items-center mb-4">
+        <div className="text-lg font-semibold text-gray-800">
+          {setDisplayName}
+        </div>
+        <div className="text-lg font-semibold text-gray-800">
+          Mode: {modeDisplayName}
         </div>
       </div>
       <div className="text-gray-900 text-xl font-medium mb-4">

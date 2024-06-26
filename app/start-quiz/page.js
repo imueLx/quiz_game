@@ -180,9 +180,19 @@ const StartQuizPage = () => {
               </div>
             </div>
           ) : difficulty === "easy" ? (
-            <Quiz questions={questions} onFinish={handleFinish} />
+            <Quiz
+              questions={questions}
+              setNumber={level}
+              mode={difficulty}
+              onFinish={handleFinish}
+            />
           ) : (
-            <HardQuiz questions={questions} onFinish={handleFinish} />
+            <HardQuiz
+              questions={questions}
+              setNumber={level}
+              mode={difficulty}
+              onFinish={handleFinish}
+            />
           )
         ) : (
           <div className="text-center text-white text-xl">Loading...</div>

@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { FaCheck, FaTimes, FaRedo, FaArrowRight } from "react-icons/fa";
 
-const HardQuiz = ({ questions, onFinish }) => {
+const HardQuiz = ({ questions, onFinish, setNumber, mode }) => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [showExplanation, setShowExplanation] = useState(false);
@@ -61,11 +61,23 @@ const HardQuiz = ({ questions, onFinish }) => {
     }, 0);
   };
 
+  // Convert setNumber to human-readable format
+  const setDisplayName = setNumber === 1 ? "Set One" : `Set ${setNumber}`;
+  const modeDisplayName = mode.charAt(0).toUpperCase() + mode.slice(1);
+
   return (
-    <div className="relative max-w-4xl w-full bg-white rounded-lg shadow-md p-6 sm:py-8 sm:px-12 space-y-6 overflow-y-auto max-h-[calc(100vh-2rem)]">
+    <div className="relative max-w-4xl w-full bg-gray-100 rounded-lg shadow-lg p-6 sm:py-8 sm:px-12 space-y-6 overflow-y-auto max-h-[calc(100vh-2rem)]">
       <div className="flex justify-between items-center mb-4">
-        <div className="text-lg font-semibold text-gray-800">
+        <div className="text-lg font-semibold text-gray-700">
           Question {currentQuestionIndex + 1}/{questions.length}
+        </div>
+      </div>
+      <div className="flex justify-between items-center mb-4">
+        <div className="text-lg font-semibold text-gray-700">
+          {setDisplayName}
+        </div>
+        <div className="text-lg font-semibold text-gray-700">
+          Mode: {modeDisplayName}
         </div>
       </div>
       <div className="text-gray-900 text-xl font-medium mb-4">
@@ -103,7 +115,7 @@ const HardQuiz = ({ questions, onFinish }) => {
         })}
       </div>
       {showExplanation && (
-        <div className="bg-gray-100 p-4 rounded-md text-gray-900">
+        <div className="bg-gray-200 p-4 rounded-md text-gray-900">
           <p className="mb-2">
             {selectedAnswer === currentQuestion.answer ? (
               <span className="text-green-500 flex items-center">
