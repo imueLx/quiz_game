@@ -1,11 +1,13 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { FaLightbulb, FaArrowLeft, FaArrowRight } from "react-icons/fa";
 
 const Quiz = ({ questions, onFinish }) => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedAnswers, setSelectedAnswers] = useState({});
   const [timer, setTimer] = useState(30); // 30 seconds for each question
+  const [checked, setChecked] = useState(false); // State to track if the answer has been checked
 
   const currentQuestion = questions[currentQuestionIndex];
 
@@ -23,6 +25,7 @@ const Quiz = ({ questions, onFinish }) => {
 
   const handleNextQuestion = () => {
     setTimer(30);
+    setChecked(false); // Reset checked state
     if (currentQuestionIndex < questions.length - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
     } else {
@@ -34,6 +37,7 @@ const Quiz = ({ questions, onFinish }) => {
     if (currentQuestionIndex > 0) {
       setCurrentQuestionIndex(currentQuestionIndex - 1);
       setTimer(30);
+      setChecked(false); // Reset checked state
     }
   };
 
@@ -42,6 +46,10 @@ const Quiz = ({ questions, onFinish }) => {
       ...selectedAnswers,
       [currentQuestionIndex]: option,
     });
+  };
+
+  const handleCheckAnswer = () => {
+    setChecked(true);
   };
 
   const handleFinish = () => {
@@ -72,39 +80,60 @@ const Quiz = ({ questions, onFinish }) => {
         {currentQuestion.question}
       </div>
       <div className="space-y-2 mb-4">
-        {currentQuestion.options.map((option, index) => (
-          <button
-            key={index}
-            onClick={() => handleAnswerClick(option)}
-            className={`block w-full p-3 text-left rounded-md border transition duration-200 ${
-              selectedAnswers[currentQuestionIndex] === option
-                ? "bg-blue-500 text-white"
-                : "bg-gray-100 text-gray-900 hover:bg-gray-200"
-            }`}
-          >
-            {option}
-          </button>
-        ))}
+        {currentQuestion.options.map((option, index) => {
+          const isCorrectAnswer = option === currentQuestion.answer;
+          const isSelectedAnswer =
+            selectedAnswers[currentQuestionIndex] === option;
+          const isChecked = checked;
+
+          return (
+            <button
+              key={index}
+              onClick={() => handleAnswerClick(option)}
+              className={`block w-full p-3 text-left rounded-md border transition duration-200 ${
+                isChecked && isSelectedAnswer && !isCorrectAnswer
+                  ? "bg-red-500 text-white"
+                  : isChecked && isCorrectAnswer
+                  ? "bg-green-500 text-white"
+                  : isSelectedAnswer
+                  ? "bg-blue-500 text-white"
+                  : "bg-gray-100 text-gray-900 hover:bg-gray-200"
+              }`}
+              disabled={isChecked} // Disable buttons after checking the answer
+            >
+              {option}
+            </button>
+          );
+        })}
       </div>
-      <div className="flex justify-between mt-4">
+      <div className="flex justify-between mt-4 space-x-4 items-center">
         <button
           onClick={handlePreviousQuestion}
-          className="bg-gray-300 text-gray-700 py-2 px-4 rounded-md hover:bg-gray-400 transition duration-200"
+          className="flex items-center bg-gray-300 text-gray-700 py-2 px-4 rounded-md hover:bg-gray-400 transition duration-200"
           disabled={currentQuestionIndex === 0}
         >
-          Back
+          <FaArrowLeft className="mr-2" /> Back
         </button>
+        <div className="flex items-center">
+          <button
+            onClick={handleCheckAnswer}
+            className="text-yellow-500 hover:text-yellow-600 transition duration-200"
+            disabled={checked} // Disable "Hint" button after checking the answer
+          >
+            <FaLightbulb size={24} />
+          </button>
+        </div>
         {currentQuestionIndex < questions.length - 1 ? (
           <button
             onClick={handleNextQuestion}
-            className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition duration-200"
+            className="flex items-center bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition duration-200"
           >
-            Next
+            Next <FaArrowRight className="ml-2" />
           </button>
         ) : (
           <button
             onClick={handleFinish}
-            className="bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600 transition duration-200"
+            className="flex items-center bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600 transition duration-200"
           >
             Finish
           </button>
