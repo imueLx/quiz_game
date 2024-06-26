@@ -46,8 +46,8 @@ export async function getHardQuestions(level) {
     // Shuffle questions array
     const shuffledQuestions = questions.sort(() => 0.5 - Math.random());
 
-    // Limit to 15 questions
-    const limitedQuestions = shuffledQuestions.slice(0, 15);
+    // Limit to 20 questions
+    const limitedQuestions = shuffledQuestions.slice(0, 20);
 
     // Convert _id to string
     const plainQuestions = limitedQuestions.map((q) => ({
