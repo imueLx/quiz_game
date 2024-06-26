@@ -1,37 +1,38 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { getQuestions, getHardQuestions } from "../../_actions/questionAction";
 import { submitScore } from "../../_actions/scoreAction";
 import Quiz from "../../components/Quiz";
-import HardQuiz from "../../components/HardQuiz"; // Import HardQuiz component
+import HardQuiz from "../../components/HardQuiz";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Link from "next/link";
+import { FaVolumeMute, FaVolumeUp } from "react-icons/fa";
 
 const StartQuizPage = () => {
   const [questions, setQuestions] = useState([]);
   const [isQuizFinished, setIsQuizFinished] = useState(false);
   const [score, setScore] = useState(0);
   const [nickname, setNickname] = useState("");
-  const [level, setLevel] = useState("1"); // Default level
-  const [difficulty, setDifficulty] = useState("easy"); // Default difficulty
+  const [level, setLevel] = useState("1");
+  const [difficulty, setDifficulty] = useState("easy");
   const [isNicknameEntered, setIsNicknameEntered] = useState(false);
+  const [isMuted, setIsMuted] = useState(false);
+  const [isQuizStarted, setIsQuizStarted] = useState(false); // New state to track quiz start
   const router = useRouter();
+  const audioRef = useRef(null);
 
   useEffect(() => {
     const fetchQuestions = async () => {
       try {
         let response;
         if (difficulty === "hard") {
-          console.log("hard mode");
           response = await getHardQuestions();
         } else {
-          console.log("easy mode");
           response = await getQuestions(level, difficulty);
         }
-        console.log(response.questions);
         setQuestions(response.questions);
       } catch (error) {
         console.error("Error fetching questions:", error);
@@ -42,6 +43,14 @@ const StartQuizPage = () => {
       fetchQuestions();
     }
   }, [isNicknameEntered, level, difficulty]);
+
+  useEffect(() => {
+    if (isQuizStarted) {
+      if (audioRef.current) {
+        audioRef.current.play();
+      }
+    }
+  }, [isQuizStarted]);
 
   const handleFinish = (finalScore) => {
     const scorePercentage = Math.round((finalScore / questions.length) * 100);
@@ -93,6 +102,7 @@ const StartQuizPage = () => {
   const handleNicknameSubmit = () => {
     if (nickname.trim()) {
       setIsNicknameEntered(true);
+      setIsQuizStarted(true); // Start the quiz
     } else {
       toast.error("Please enter a nickname", {
         position: "top-right",
@@ -106,9 +116,25 @@ const StartQuizPage = () => {
     }
   };
 
+  const toggleMute = () => {
+    setIsMuted(!isMuted);
+    if (audioRef.current) {
+      audioRef.current.muted = !isMuted;
+    }
+  };
+
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-r from-teal-400 to-blue-400 p-6">
       <ToastContainer />
+      <audio ref={audioRef} src="/background-music-quiz.mp3" loop />
+      {isQuizStarted && (
+        <button
+          onClick={toggleMute}
+          className="absolute top-4 right-4 text-white text-2xl"
+        >
+          {isMuted ? <FaVolumeMute /> : <FaVolumeUp />}
+        </button>
+      )}
       {isNicknameEntered ? (
         questions.length > 0 ? (
           isQuizFinished ? (
