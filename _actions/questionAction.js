@@ -26,7 +26,13 @@ export async function getHardQuestions() {
     await connectDB();
     const questions = await HardQuestionModel.find({}).lean(); // Fetch all questions
 
-    const limitedQuestions = questions.sort(() => 0.5 - Math.random());
+    // Shuffle questions array
+    const shuffledQuestions = questions.sort(() => 0.5 - Math.random());
+
+    // Limit to 15 questions
+    const limitedQuestions = shuffledQuestions.slice(0, 15);
+
+    // Convert _id to string
     const plainQuestions = limitedQuestions.map((q) => ({
       ...q,
       _id: q._id.toString(),
