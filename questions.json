@@ -1,0 +1,322 @@
+[
+  {
+    "level": "1",
+    "question": "When teaching a client about contraception, which of the following would NURSE include as the MOST effective method for preventing sexually transmitted infections?",
+    "options": [
+      "Spermicides",
+      "intrauterine device (IUD)",
+      "condoms",
+      "cervical cap"
+    ],
+    "answer": "condoms"
+  },
+  {
+    "level": "1",
+    "question": "Immediately prior to expulsion, which of the following cardinal movements/mechanism of normal labor occur?",
+    "options": [
+      "Descent",
+      "Internal rotation",
+      "Extension",
+      "external rotation (restitution)"
+    ],
+    "answer": "Extension"
+  },
+  {
+    "level": "1",
+    "question": "The cardinal movements/mechanism of labor is which of the following sequence?",
+    "options": [
+      "engagement, descent, flexion, external rotation, extension, internal rotation and expulsion",
+      "engagement, descent, flexion, internal rotation, extension, external rotation and expulsion",
+      "engagement, internal rotation, flexion, descent, extension, external rotation and expulsion",
+      "engagement, flexion, descent, internal rotation, extension, external rotation and expulsion"
+    ],
+    "answer": "engagement, descent, flexion, internal rotation, extension, external rotation and expulsion"
+  },
+  {
+    "level": "1",
+    "question": "Immediately after external rotation, which of the following cardinal/mechanisms of normal labor occur?",
+    "options": ["Internal rotation", "Extension", "flexion", "expulsion"],
+    "answer": "expulsion"
+  },
+  {
+    "level": "1",
+    "question": "Dilation of the cervix continuous from 4 to 7 cm, contractions become stronger, more frequent, longer and more painful is termed as:",
+    "options": [
+      "Latent phase",
+      "Active phase",
+      "Transition phase",
+      "Dilation phase"
+    ],
+    "answer": "Active phase"
+  },
+  {
+    "level": "1",
+    "question": "Triangular in shaped, normally closes by the end of age 2 months, junction of parietal bones and occipital bones is termed as:",
+    "options": [
+      "Anterior fontanelle",
+      "Posterior fontanelle",
+      "Sagittal suture",
+      "Coronal suture"
+    ],
+    "answer": "Posterior fontanelle"
+  },
+  {
+    "level": "1",
+    "question": "Mrs. Matriano just gave birth to a baby boy, Miss Kylie the NURSE on duty use the Apgar score one minute after to measure the newborn’s immediate adjustment to extrauterine life. The following noted appearance is completely pink, heart rate is 126, coughing and sneezing, with some flexion of extremities, and slow weak cry. Which of the following Apgar score and points status is correct:",
+    "options": [
+      "8 – with good condition",
+      "7 – with good condition",
+      "6 – mild",
+      "4 – monitoring"
+    ],
+    "answer": "8 – with good condition"
+  },
+  {
+    "level": "1",
+    "question": "Trisha Mae, 17-year-old came to the clinic for a birth control method. She sat through the class that describes the methods available to her. After class, she asked Ms. Paulette the NURSE, “Anong paraan o method kaya ang pinakamabuti para sa akin?” The best response by Ms. Paulette is:",
+    "options": [
+      "You are so young Trisha, are you sure you are ready for the responsibilities of a sexual relationship?",
+      "Because of your age, we need your parents’ consent before you can be examined and then we’ll talk",
+      "Before I can help you with that \"question\", I need to know your sexual activity.",
+      "I cannot advice you Trisha because you are too young to be interested with that kind of methods."
+    ],
+    "answer": "Before I can help you with that \"question\", I need to know your sexual activity."
+  },
+  {
+    "level": "1",
+    "question": "Which of the following kinds of spontaneous abortion occur complete expulsion of all products of conception:",
+    "options": [
+      "Missed abortion",
+      "Incomplete abortion",
+      "Habitual abortion",
+      "Complete abortion"
+    ],
+    "answer": "Complete abortion"
+  },
+  {
+    "level": "1",
+    "question": "All but one are the signs and symptoms of spontaneous abortion:",
+    "options": [
+      "vaginal bleeding – spotting",
+      "hypertension and edema",
+      "cramping in the lower abdomen",
+      "fever and malaise"
+    ],
+    "answer": "hypertension and edema"
+  },
+  {
+    "level": "1",
+    "question": "Which of the following complications of pregnancy describes the implantation of products of conception in a site other than endometrium or outside the uterine cavity:",
+    "options": [
+      "Precipitate labor",
+      "Placenta previa",
+      "Gestational Trophopblastic Disease",
+      "Ectopic pregnancy"
+    ],
+    "answer": "Ectopic pregnancy"
+  },
+  {
+    "level": "1",
+    "question": "The most common site for ectopic pregnancy is which of the following:",
+    "options": [
+      "Ovarian",
+      "Abdominal (intestine)",
+      "Tubal (distal portion)",
+      "Cervical"
+    ],
+    "answer": "Tubal (distal portion)"
+  },
+  {
+    "level": "1",
+    "question": "All of the following are the common clinical manifestations of ectopic pregnancy, EXCEPT:",
+    "options": [
+      "vaginal bleeding",
+      "sharp abdominal pain referred to shoulder pain",
+      "weight loss, excessive nausea and vomiting",
+      "adnexal mass, tenderness"
+    ],
+    "answer": "weight loss, excessive nausea and vomiting"
+  },
+  {
+    "level": "1",
+    "question": "Tonic and clonic convulsions, renal shutdown, coma. Oliguria and anuria are signs and symptoms of which of the following complications of pregnancy:",
+    "options": [
+      "Hyperemesis gravidarum",
+      "Eclampsia",
+      "Ectopic pregnancy",
+      "Prolapsed umbilical cord"
+    ],
+    "answer": "Eclampsia"
+  },
+  {
+    "level": "1",
+    "question": "Epigastric pain, cerebral or visual disturbances, persistent vomiting, high blood pressure (160/100mmHg) are signs and symptoms of which of the following:",
+    "options": [
+      "Gestational Trophoblastic Disease",
+      "Severe Preeclampsia",
+      "Thrombophlebitis",
+      "Spontaneous abortion"
+    ],
+    "answer": "Severe Preeclampsia"
+  },
+  {
+    "level": "2",
+    "question": "The therapeutic management for incompetent cervix is which of the following surgical procedure?",
+    "options": [
+      "Dilation and Curretage",
+      "Shirodkar operation/Mc Donald",
+      "Kleihauer-Betke test",
+      "Surgical removal repair with Laparotomy"
+    ],
+    "answer": "Shirodkar operation/Mc Donald"
+  },
+  {
+    "level": "2",
+    "question": "Which of the following complications of pregnancy described severe nausea and vomiting, leading to electrolyte, metabolic, and nutritional imbalances in the absence of other medical problems and required hospitalization:",
+    "options": [
+      "Pregnancy induced hypertension",
+      "Incompetent cervix",
+      "Hyperemesis gravidarum",
+      "Abruptio placenta"
+    ],
+    "answer": "Hyperemesis gravidarum"
+  },
+  {
+    "level": "2",
+    "question": "Described as premature separation of a normally implanted placenta after the 20th week of pregnancy, typically with severe hemorrhage is which of the following complications of pregnancy:",
+    "options": [
+      "Placenta previa",
+      "Incompetent cervix",
+      "Abruptio placenta",
+      "Postpartum hemorrhage"
+    ],
+    "answer": "Abruptio placenta"
+  },
+  {
+    "level": "2",
+    "question": "The sign and symptoms of abruptio placenta include which of the following:",
+    "options": [
+      "Painless vaginal discharge",
+      "Soft nontender abdomen",
+      "FHR stable and within normal limits",
+      "Sudden, intense, localized uterine pain"
+    ],
+    "answer": "Sudden, intense, localized uterine pain"
+  },
+  {
+    "level": "2",
+    "question": "The sign and symptom of placenta previa include which of the following:",
+    "options": [
+      "FHR present and absent",
+      "Bright red, painless vaginal bleeding",
+      "Uterine outline possibly enlarged",
+      "Concealed or external dark red discharge"
+    ],
+    "answer": "Bright red, painless vaginal bleeding"
+  },
+  {
+    "level": "2",
+    "question": "All but one are the causes and predisposing factors of placenta previa:",
+    "options": [
+      "Uterine incisions",
+      "Multiparity",
+      "Previous cesarean section",
+      "Short umbilical cord"
+    ],
+    "answer": "Short umbilical cord"
+  },
+  {
+    "level": "2",
+    "question": "Type of cesarean incision and this is done horizontally in the lower uterine segment, also known as pfannentiel’s incision:",
+    "options": [
+      "Porro’s",
+      "Classic cesarean incision",
+      "Abdominal incision",
+      "Low segment incision"
+    ],
+    "answer": "Low segment incision"
+  },
+  {
+    "level": "2",
+    "question": "Porro’s incision is necessary in the presence of following indications, EXCEPT:",
+    "options": [
+      "Cancer of uterus",
+      "PIH",
+      "Classic cesarean incision",
+      "Placenta Accreta"
+    ],
+    "answer": "Classic cesarean incision"
+  },
+  {
+    "level": "2",
+    "question": "Which of the following type of pelvis is the typical male pelvis?",
+    "options": ["Gynecoid", "Android", "Platypelloid", "Anthropoid"],
+    "answer": "Android"
+  },
+  {
+    "level": "2",
+    "question": "Which of the following intrapartum complications describes as the labor begins after 20 weeks’ gestation and before 38 weeks’ gestation:",
+    "options": [
+      "Postpartum hemorrhage",
+      "Preterm labor",
+      "Cesarian delivery",
+      "Prolapsed cord"
+    ],
+    "answer": "Preterm labor"
+  },
+  {
+    "level": "2",
+    "question": "Ritodrine (Yutopar) IV is chosen as the beta-adrenergic agent to treat a woman’s preterm labor. The nurse can expect with common maternal side effect?",
+    "options": [
+      "Tachycardia",
+      "Hypoglycemia",
+      "Nausea and vomiting",
+      "Blurred vision"
+    ],
+    "answer": "Tachycardia"
+  },
+  {
+    "level": "2",
+    "question": "A woman in preterm labor is undergoing tocolysis and has shown signs/symptoms of toxicity. The nurse prepares and administers the antidote for ritodrine hydrochloride (Yutopar) toxicity which is:",
+    "options": [
+      "Calcium gloconate, 10 mg",
+      "Terbutaline, 10 mg",
+      "Propanol, 1 mg",
+      "Naloxone hydrochloride"
+    ],
+    "answer": "Propanol, 1 mg"
+  },
+  {
+    "level": "2",
+    "question": "What is the NURSE first action immediately following rupture of the membranes of a woman in labor?",
+    "options": [
+      "Look for the presence of the umbilical cord at the vaginal orifice",
+      "Monitor vital signs",
+      "Note the color and consistency of the amniotic fluid",
+      "Assess the fetal heart rate (FHR)"
+    ],
+    "answer": "Assess the fetal heart rate (FHR)"
+  },
+  {
+    "level": "2",
+    "question": "All but one are the causes and predisposing factors of uterine rupture:",
+    "options": [
+      "Tetanic contraction",
+      "Old scars",
+      "Preterm or SGA",
+      "Malapplication of forceps"
+    ],
+    "answer": "Preterm or SGA"
+  },
+  {
+    "level": "2",
+    "question": "According to Reva Rubin in her classic work on maternal behavior, in which phase would the new mother typically passive, dependent, and frequently review her labor and delivery experience?",
+    "options": [
+      "During postpartum depression",
+      "During the letting-go phase",
+      "During the taking-hold phase",
+      "During the taking-in phase"
+    ],
+    "answer": "During the taking-in phase"
+  }
+]
