@@ -21,10 +21,27 @@ export async function getQuestions(level) {
   }
 }
 
-export async function getHardQuestions() {
+export async function getHardQuestions(level) {
   try {
     await connectDB();
-    const questions = await HardQuestionModel.find({}).lean(); // Fetch all questions
+    let questions;
+
+    if (level === "1") {
+      // Fetch questions without a level
+      questions = await HardQuestionModel.find({
+        $or: [{ level: { $exists: false } }, { level: null }],
+      }).lean();
+    } else if (level === "2") {
+      // Fetch questions with level 1 as an integer or a string
+      questions = await HardQuestionModel.find({
+        $or: [{ level: 1 }, { level: "1" }],
+      }).lean();
+    } else if (level === "3") {
+      // Fetch questions with level 2 as a string
+      questions = await HardQuestionModel.find({ level: "2" }).lean();
+    } else {
+      throw new Error("Invalid level specified");
+    }
 
     // Shuffle questions array
     const shuffledQuestions = questions.sort(() => 0.5 - Math.random());

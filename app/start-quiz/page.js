@@ -20,7 +20,7 @@ const StartQuizPage = () => {
   const [difficulty, setDifficulty] = useState("easy");
   const [isNicknameEntered, setIsNicknameEntered] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
-  const [isQuizStarted, setIsQuizStarted] = useState(false); // New state to track quiz start
+  const [isQuizStarted, setIsQuizStarted] = useState(false);
   const router = useRouter();
   const audioRef = useRef(null);
 
@@ -29,9 +29,9 @@ const StartQuizPage = () => {
       try {
         let response;
         if (difficulty === "hard") {
-          response = await getHardQuestions();
+          response = await getHardQuestions(level);
         } else {
-          response = await getQuestions(level, difficulty);
+          response = await getQuestions(level);
         }
         setQuestions(response.questions);
       } catch (error) {
@@ -102,7 +102,7 @@ const StartQuizPage = () => {
   const handleNicknameSubmit = () => {
     if (nickname.trim()) {
       setIsNicknameEntered(true);
-      setIsQuizStarted(true); // Start the quiz
+      setIsQuizStarted(true);
     } else {
       toast.error("Please enter a nickname", {
         position: "top-right",
@@ -217,21 +217,29 @@ const StartQuizPage = () => {
               <option value="hard">Hard Mode</option>
             </select>
           </label>
-          {difficulty !== "hard" && (
-            <label className="block mt-4">
-              <span className="text-gray-700">Choose Set of Questions</span>
-              <select
-                value={level}
-                onChange={(e) => setLevel(e.target.value)}
-                className="mt-1 block w-full p-3 border border-gray-300 rounded-lg focus:border-teal-500 focus:ring focus:ring-teal-500 focus:ring-opacity-50"
-              >
-                <option value="1">Set One</option>
-                <option value="2">Set Two</option>
-                <option value="3">Set Three</option>
-                <option value="3">Set Four</option>=
-              </select>
-            </label>
-          )}
+          <label className="block mt-4">
+            <span className="text-gray-700">Choose Set of Questions</span>
+            <select
+              value={level}
+              onChange={(e) => setLevel(e.target.value)}
+              className="mt-1 block w-full p-3 border border-gray-300 rounded-lg focus:border-teal-500 focus:ring focus:ring-teal-500 focus:ring-opacity-50"
+            >
+              {difficulty === "easy" ? (
+                <>
+                  <option value="1">Set One</option>
+                  <option value="2">Set Two</option>
+                  <option value="3">Set Three</option>
+                  <option value="4">Set Four</option>
+                </>
+              ) : (
+                <>
+                  <option value="1">Set One</option>
+                  <option value="2">Set Two</option>
+                  <option value="3">Set Three</option>
+                </>
+              )}
+            </select>
+          </label>
           <button
             onClick={handleNicknameSubmit}
             className="mt-6 w-full bg-teal-500 text-white py-3 px-6 rounded-lg hover:bg-teal-600 transition duration-200"
