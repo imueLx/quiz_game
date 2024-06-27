@@ -1,7 +1,6 @@
 "use client";
 
 import { Suspense, useEffect, useState, useRef } from "react";
-import { useRouter } from "next/navigation";
 import { getQuestions, getHardQuestions } from "../../_actions/questionAction";
 import { submitScore } from "../../_actions/scoreAction";
 import Quiz from "../../components/Quiz";
@@ -22,7 +21,6 @@ const StartQuizPage = () => {
   const [isNicknameEntered, setIsNicknameEntered] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
   const [isQuizStarted, setIsQuizStarted] = useState(false);
-  const router = useRouter();
   const audioRef = useRef(null);
 
   useEffect(() => {
@@ -86,9 +84,6 @@ const StartQuizPage = () => {
         draggable: true,
         progress: undefined,
       });
-      setTimeout(() => {
-        router.push("/");
-      }, 3000);
     } catch (error) {
       console.error("Error submitting score:", error);
       toast.error("Error submitting score. Please try again.", {

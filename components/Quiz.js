@@ -6,7 +6,7 @@ import { FaLightbulb, FaArrowLeft, FaArrowRight } from "react-icons/fa";
 const Quiz = ({ questions, onFinish, setNumber, mode }) => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedAnswers, setSelectedAnswers] = useState({});
-  const [timer, setTimer] = useState(30); // 30 seconds for each question
+  const [timer, setTimer] = useState(60); // 60 seconds for each question
   const [checked, setChecked] = useState(false); // State to track if the answer has been checked
 
   const currentQuestion = questions[currentQuestionIndex];
