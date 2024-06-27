@@ -24,7 +24,7 @@ const Quiz = ({ questions, onFinish, setNumber, mode }) => {
   }, [timer]);
 
   const handleNextQuestion = () => {
-    setTimer(30);
+    setTimer(60);
     setChecked(false); // Reset checked state
     if (currentQuestionIndex < questions.length - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
@@ -36,7 +36,7 @@ const Quiz = ({ questions, onFinish, setNumber, mode }) => {
   const handlePreviousQuestion = () => {
     if (currentQuestionIndex > 0) {
       setCurrentQuestionIndex(currentQuestionIndex - 1);
-      setTimer(30);
+      setTimer(60);
       setChecked(false); // Reset checked state
     }
   };
