@@ -10,6 +10,7 @@ import DoneQuiz from "../../components/DoneQuiz";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { FaVolumeMute, FaVolumeUp } from "react-icons/fa";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 const StartQuizPage = () => {
   const [questions, setQuestions] = useState([]);
@@ -142,12 +143,12 @@ const StartQuizPage = () => {
       {isNicknameEntered ? (
         loading ? (
           <div className="flex items-center justify-center h-screen">
-            <div className="bg-gray-200 p-6 rounded-lg shadow-lg">
-              <p className="text-lg font-medium text-gray-700">
+            <div className="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center">
+              <p className="text-xl font-semibold text-gray-800">
                 Loading Set {level} Questions...
               </p>
-              <div className="mt-4">
-                <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-gray-900"></div>
+              <div className="mt-4 animate-spin text-4xl text-gray-900">
+                <AiOutlineLoading3Quarters />
               </div>
             </div>
           </div>
