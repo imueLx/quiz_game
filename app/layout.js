@@ -1,5 +1,4 @@
 import { Raleway } from "next/font/google";
-import Head from "next/head";
 import "./globals.css";
 
 const raleway = Raleway({
@@ -15,11 +14,6 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <Head>
-        <title>{metadata.title}</title>
-        <meta name="description" content={metadata.description} />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
       <body className={raleway.className}>{children}</body>
     </html>
   );
