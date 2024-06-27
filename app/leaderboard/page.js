@@ -6,7 +6,6 @@ import { getScores } from "../../_actions/scoreAction";
 
 const Leaderboards = () => {
   const [leaderboardData, setLeaderboardData] = useState([]);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchScores = async () => {
@@ -15,23 +14,11 @@ const Leaderboards = () => {
         setLeaderboardData(response.scores);
       } catch (error) {
         console.error("Error fetching scores:", error);
-      } finally {
-        setLoading(false);
       }
     };
 
     fetchScores();
   }, []);
-
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center py-16 px-4 sm:px-6 lg:px-8">
-        <h1 className="text-4xl font-extrabold text-gray-900 mb-8">
-          Loading...
-        </h1>
-      </div>
-    );
-  }
 
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col items-center py-16 px-4 sm:px-6 lg:px-8">

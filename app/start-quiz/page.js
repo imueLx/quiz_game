@@ -1,14 +1,15 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import { Suspense, useEffect, useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { getQuestions, getHardQuestions } from "../../_actions/questionAction";
 import { submitScore } from "../../_actions/scoreAction";
 import Quiz from "../../components/Quiz";
 import HardQuiz from "../../components/HardQuiz";
+import EnterNickname from "../../components/EnterNickname";
+import DoneQuiz from "../../components/DoneQuiz";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Link from "next/link";
 import { FaVolumeMute, FaVolumeUp } from "react-icons/fa";
 
 const StartQuizPage = () => {
@@ -46,9 +47,12 @@ const StartQuizPage = () => {
 
   useEffect(() => {
     if (isQuizStarted) {
-      if (audioRef.current) {
-        audioRef.current.play();
-      }
+      const timer = setTimeout(() => {
+        if (audioRef.current) {
+          audioRef.current.play();
+        }
+      }, 1500);
+      return () => clearTimeout(timer); // Clean up the timeout if the component unmounts or dependencies change
     }
   }, [isQuizStarted]);
 
@@ -138,131 +142,43 @@ const StartQuizPage = () => {
       {isNicknameEntered ? (
         questions.length > 0 ? (
           isQuizFinished ? (
-            <div className="max-w-2xl w-full bg-white rounded-xl shadow-lg p-8 space-y-6">
-              <div className="text-center">
-                <h2 className="text-3xl font-bold text-gray-800 mb-4">
-                  Quiz Finished!
-                </h2>
-                <div className="bg-gray-100 p-6 rounded-xl shadow-inner space-y-4">
-                  <p className="text-lg text-gray-700">
-                    Your score: <span className="font-semibold">{score}</span>%
-                  </p>
-                  <p className="text-lg text-gray-700">
-                    Total questions:{" "}
-                    <span className="font-semibold">{questions.length}</span>
-                  </p>
-                  <p className="text-lg text-gray-700">
-                    Correct answers:{" "}
-                    <span className="font-semibold">
-                      {Math.round((score / 100) * questions.length)}
-                    </span>
-                  </p>
-                  <p className="text-lg text-gray-700">
-                    Wrong answers:{" "}
-                    <span className="font-semibold">
-                      {questions.length -
-                        Math.round((score / 100) * questions.length)}
-                    </span>
-                  </p>
-                </div>
-                <button
-                  onClick={handleSubmit}
-                  className="mt-6 w-full bg-teal-500 text-white py-3 px-6 rounded-lg hover:bg-teal-600 transition duration-200"
-                >
-                  Submit Score
-                </button>
-                <Link
-                  href="/"
-                  className="mt-4 block w-full bg-gray-500 text-white py-3 px-6 rounded-lg hover:bg-gray-600 transition duration-200 text-center"
-                >
-                  Go Back
-                </Link>
-              </div>
-            </div>
-          ) : difficulty === "easy" ? (
-            <Quiz
+            <DoneQuiz
+              score={score}
               questions={questions}
-              setNumber={level}
-              mode={difficulty}
-              onFinish={handleFinish}
+              handleSubmit={handleSubmit}
             />
           ) : (
-            <HardQuiz
-              questions={questions}
-              setNumber={level}
-              mode={difficulty}
-              onFinish={handleFinish}
-            />
-          )
-        ) : (
-          <div className="text-center text-white text-xl">Loading...</div>
-        )
-      ) : (
-        <div className="max-w-md w-full bg-white rounded-lg shadow-md p-8 space-y-6">
-          <div className="text-center mb-6">
-            <h2 className="text-3xl font-bold text-gray-800">
-              Enter Your Nickname
-            </h2>
-            <p className="text-gray-600 mt-2">
-              Please provide a nickname to start the quiz.
-            </p>
-          </div>
-          <label className="block">
-            <span className="text-gray-700">Nickname</span>
-            <input
-              type="text"
-              value={nickname}
-              onChange={(e) => setNickname(e.target.value)}
-              className="mt-1 block w-full p-3 border border-gray-300 rounded-lg focus:border-teal-500 focus:ring focus:ring-teal-500 focus:ring-opacity-50"
-            />
-          </label>
-          <label className="block mt-4">
-            <span className="text-gray-700">Difficulty</span>
-            <select
-              value={difficulty}
-              onChange={(e) => setDifficulty(e.target.value)}
-              className="mt-1 block w-full p-3 border border-gray-300 rounded-lg focus:border-teal-500 focus:ring focus:ring-teal-500 focus:ring-opacity-50"
-            >
-              <option value="easy">Easy Mode</option>
-              <option value="hard">Hard Mode</option>
-            </select>
-          </label>
-          <label className="block mt-4">
-            <span className="text-gray-700">Choose Set of Questions</span>
-            <select
-              value={level}
-              onChange={(e) => setLevel(e.target.value)}
-              className="mt-1 block w-full p-3 border border-gray-300 rounded-lg focus:border-teal-500 focus:ring focus:ring-teal-500 focus:ring-opacity-50"
+            <Suspense
+              fallback={<div>Loading Set {questions} Questions...</div>}
             >
               {difficulty === "easy" ? (
-                <>
-                  <option value="1">Set One</option>
-                  <option value="2">Set Two</option>
-                  <option value="3">Set Three</option>
-                  <option value="4">Set Four</option>
-                </>
+                <Quiz
+                  questions={questions}
+                  setNumber={level}
+                  mode={difficulty}
+                  onFinish={handleFinish}
+                />
               ) : (
-                <>
-                  <option value="1">Set One</option>
-                  <option value="2">Set Two</option>
-                  <option value="3">Set Three</option>
-                </>
+                <HardQuiz
+                  questions={questions}
+                  setNumber={level}
+                  mode={difficulty}
+                  onFinish={handleFinish}
+                />
               )}
-            </select>
-          </label>
-          <button
-            onClick={handleNicknameSubmit}
-            className="mt-6 w-full bg-teal-500 text-white py-3 px-6 rounded-lg hover:bg-teal-600 transition duration-200"
-          >
-            Start Quiz
-          </button>
-          <Link
-            href="/"
-            className="mt-1 block w-full bg-gray-500 text-white py-3 px-6 rounded-lg hover:bg-gray-600 transition duration-200 text-center"
-          >
-            Go Back
-          </Link>
-        </div>
+            </Suspense>
+          )
+        ) : null
+      ) : (
+        <EnterNickname
+          nickname={nickname}
+          setNickname={setNickname}
+          difficulty={difficulty}
+          setDifficulty={setDifficulty}
+          level={level}
+          setLevel={setLevel}
+          handleNicknameSubmit={handleNicknameSubmit}
+        />
       )}
     </div>
   );
