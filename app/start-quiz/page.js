@@ -75,10 +75,11 @@ const StartQuizPage = () => {
 
   const handleSubmit = async () => {
     try {
-      const response = await submitScore({ nickname, score });
+      const response = await submitScore({ nickname, score, difficulty });
       if (response.errMsg) {
         throw new Error(response.errMsg);
       }
+      console.log("Score submitted successfully:", response.message);
       toast.success("Score submitted successfully!", {
         position: "top-right",
         autoClose: 5000,
@@ -140,13 +141,13 @@ const StartQuizPage = () => {
       )}
       {isNicknameEntered ? (
         loading ? (
-          <div class="flex items-center justify-center h-screen">
-            <div class="bg-gray-200 p-6 rounded-lg shadow-lg">
-              <p class="text-lg font-medium text-gray-700">
+          <div className="flex items-center justify-center h-screen">
+            <div className="bg-gray-200 p-6 rounded-lg shadow-lg">
+              <p className="text-lg font-medium text-gray-700">
                 Loading Set {level} Questions...
               </p>
-              <div class="mt-4">
-                <div class="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-gray-900"></div>
+              <div className="mt-4">
+                <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-gray-900"></div>
               </div>
             </div>
           </div>

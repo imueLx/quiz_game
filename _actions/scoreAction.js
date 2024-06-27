@@ -2,6 +2,7 @@
 
 import ScoreModel from "../models/ScoreModel";
 import connectDB from "../config/database";
+import { cp } from "fs";
 
 export async function getScores() {
   try {
@@ -17,12 +18,13 @@ export async function getScores() {
   }
 }
 
-export async function submitScore({ nickname, score }) {
+export async function submitScore({ nickname, score, difficulty }) {
   try {
-    await connectDB(); // Connect to MongoDB
+    await connectDB();
     const newScore = new ScoreModel({
       nickname,
       score: Number(score), // Ensure score is converted to number
+      difficulty,
     });
     await newScore.save(); // Save the new score
     return { message: "Score submitted successfully" };

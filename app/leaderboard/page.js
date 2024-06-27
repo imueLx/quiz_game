@@ -3,6 +3,8 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { getScores } from "../../_actions/scoreAction";
+import { BiStar } from "react-icons/bi";
+import { FaMedal } from "react-icons/fa";
 
 const Leaderboards = () => {
   const [leaderboardData, setLeaderboardData] = useState([]);
@@ -21,54 +23,78 @@ const Leaderboards = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col items-center py-16 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-white flex flex-col items-center py-8 px-4 sm:px-6 lg:px-8">
       <h1 className="text-4xl font-extrabold text-gray-900 mb-8">
         Top Performers
       </h1>
       <div className="w-full max-w-4xl">
-        <div className="bg-white shadow rounded-lg overflow-hidden">
-          <div className="px-6 py-3 bg-gray-50 border-b border-gray-200 flex justify-between">
-            <span className="text-lg font-medium text-gray-900">Nickname</span>
-            <span className="text-lg font-medium text-gray-900">Score</span>
+        <div className="bg-gray-100 shadow-xl rounded-lg overflow-hidden">
+          <div className="px-6 py-4 bg-gray-200 text-gray-900 text-lg font-medium grid grid-cols-4 gap-4 text-center">
+            <span>Rank</span>
+            <span>Nickname</span>
+            <span>Score</span>
+            <span>Mode</span>
           </div>
-          <ul className="divide-y divide-gray-200 overflow-y-auto max-h-96 lg:max-h-[32rem]">
+          <ul className="divide-y divide-gray-300 max-h-96 overflow-y-auto">
             {leaderboardData.slice(0, 10).map((item, index) => (
               <li
                 key={index}
-                className={`px-6 py-4 flex justify-between items-center ${
+                className={`px-6 py-4 grid grid-cols-4 gap-4 items-center text-center ${
                   index === 0
-                    ? "bg-blue-100 font-extrabold text-2xl"
+                    ? "bg-yellow-100 font-bold text-xl"
                     : index === 1
-                    ? "bg-gray-200 font-bold"
+                    ? "bg-gray-100 font-semibold"
                     : index === 2
-                    ? "bg-gray-300"
+                    ? "bg-gray-200"
                     : "bg-white"
                 }`}
               >
-                <div className="flex items-center space-x-4">
-                  <div
-                    className={`text-lg ${index === 0 ? "text-blue-900" : ""}`}
-                  >
-                    {index + 1}
-                  </div>
-                  <div className="text-lg">{item.nickname}</div>
+                <div className="flex justify-center items-center space-x-2">
+                  {index < 3 && (
+                    <FaMedal
+                      className={`${
+                        index === 0
+                          ? "text-yellow-500"
+                          : index === 1
+                          ? "text-gray-500"
+                          : "text-orange-500"
+                      }`}
+                    />
+                  )}
+                  <span className="text-lg">{index + 1}</span>
                 </div>
-                <div className="text-lg text-gray-500">{item.score}</div>
+                <div className="text-lg">{item.nickname}</div>
+                <div className="text-lg text-gray-700">{item.score}</div>
+                <div className="text-lg flex justify-center items-center">
+                  {item.difficulty === "easy" ? (
+                    <span className="text-green-500 flex items-center">
+                      <BiStar className="mr-1" />
+                      Easy
+                    </span>
+                  ) : item.difficulty === "hard" ? (
+                    <span className="text-red-500 flex items-center">
+                      <BiStar className="mr-1" />
+                      Hard
+                    </span>
+                  ) : (
+                    <span className="text-gray-500">Unknown</span>
+                  )}
+                </div>
               </li>
             ))}
           </ul>
         </div>
       </div>
-      <div className="mt-8 flex space-x-4">
+      <div className="mt-8 flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 w-full max-w-4xl justify-center">
         <Link
           href="/"
-          className="px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700"
+          className="w-full sm:w-auto px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 flex justify-center"
         >
           Go Back
         </Link>
         <Link
           href="/start-quiz"
-          className="px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700"
+          className="w-full sm:w-auto px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 flex justify-center"
         >
           Take a Quiz
         </Link>
