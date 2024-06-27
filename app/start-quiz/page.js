@@ -21,10 +21,12 @@ const StartQuizPage = () => {
   const [isNicknameEntered, setIsNicknameEntered] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
   const [isQuizStarted, setIsQuizStarted] = useState(false);
+  const [loading, setLoading] = useState(true); // New loading state
   const audioRef = useRef(null);
 
   useEffect(() => {
     const fetchQuestions = async () => {
+      setLoading(true); // Set loading to true when fetching starts
       try {
         let response;
         if (difficulty === "hard") {
@@ -35,6 +37,8 @@ const StartQuizPage = () => {
         setQuestions(response.questions);
       } catch (error) {
         console.error("Error fetching questions:", error);
+      } finally {
+        setLoading(false); // Set loading to false when fetching ends
       }
     };
 
@@ -135,7 +139,18 @@ const StartQuizPage = () => {
         </button>
       )}
       {isNicknameEntered ? (
-        questions.length > 0 ? (
+        loading ? (
+          <div class="flex items-center justify-center h-screen">
+            <div class="bg-gray-200 p-6 rounded-lg shadow-lg">
+              <p class="text-lg font-medium text-gray-700">
+                Loading Set {level} Questions...
+              </p>
+              <div class="mt-4">
+                <div class="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-gray-900"></div>
+              </div>
+            </div>
+          </div>
+        ) : questions.length > 0 ? (
           isQuizFinished ? (
             <DoneQuiz
               score={score}
@@ -143,9 +158,7 @@ const StartQuizPage = () => {
               handleSubmit={handleSubmit}
             />
           ) : (
-            <Suspense
-              fallback={<div>Loading Set {questions} Questions...</div>}
-            >
+            <Suspense fallback={<div>Loading Set {level} Questions...</div>}>
               {difficulty === "easy" ? (
                 <Quiz
                   questions={questions}
@@ -163,7 +176,9 @@ const StartQuizPage = () => {
               )}
             </Suspense>
           )
-        ) : null
+        ) : (
+          <div>No questions available.</div>
+        )
       ) : (
         <EnterNickname
           nickname={nickname}
