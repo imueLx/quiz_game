@@ -67,7 +67,18 @@ const Quiz = ({ questions, onFinish, setNumber, mode }) => {
   };
 
   // Convert setNumber to human-readable format
-  const setDisplayName = setNumber === 1 ? "Set One" : `Set ${setNumber}`;
+  const setDisplayName =
+    setNumber === "1" || setNumber === 1
+      ? "Set One"
+      : setNumber === "2"
+      ? "Set Two"
+      : setNumber === "3"
+      ? "Set Three"
+      : setNumber === "4"
+      ? "Set Four"
+      : setNumber === "99"
+      ? "Special Set"
+      : `Set ${setNumber}`;
   const modeDisplayName = mode.charAt(0).toUpperCase() + mode.slice(1);
 
   return (

@@ -59,6 +59,8 @@ const EnterNickname = ({
               <option value="1">Set One</option>
               <option value="2">Set Two</option>
               <option value="3">Set Three</option>
+              <option value="4">Set Four</option>
+              <option value="99">Special Set</option>
             </>
           )}
         </select>

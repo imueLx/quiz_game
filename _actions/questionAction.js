@@ -39,6 +39,9 @@ export async function getHardQuestions(level) {
     } else if (level === "3") {
       // Fetch questions with level 2 as a string
       questions = await HardQuestionModel.find({ level: "2" }).lean();
+    } else if (level === "99") {
+      // Fetch questions with level 99
+      questions = await HardQuestionModel.find({ level: 99 }).lean();
     } else {
       throw new Error("Invalid level specified");
     }
