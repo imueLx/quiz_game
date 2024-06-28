@@ -145,8 +145,11 @@ const StartQuizPage = () => {
           <div className="flex items-center justify-center h-screen">
             <div className="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center">
               <p className="text-xl font-semibold text-gray-800">
-                Loading Set {level} Questions...
+                {level === "99"
+                  ? "Loading Special Set Questions..."
+                  : `Loading Set ${level} Questions...`}
               </p>
+
               <div className="mt-4 animate-spin text-4xl text-gray-900">
                 <AiOutlineLoading3Quarters />
               </div>
