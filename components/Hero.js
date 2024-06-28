@@ -1,10 +1,51 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 const Hero = () => {
   return (
-    <div className="min-h-screen bg-blue-200 flex items-center justify-center py-16 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto text-center">
+    <div className="relative min-h-screen flex items-center justify-center py-16 px-4 sm:px-6 lg:px-8 bg-blue-200">
+      {/* Background Images */}
+      <div className="absolute inset-0">
+        <div className="absolute top-0 left-10 w-36 h-36 sm:w-28 sm:h-28 lg:w-40 lg:h-40">
+          <Image
+            src="/images/nurse-cap.png"
+            alt="Nurse Cap"
+            layout="fill"
+            objectFit="contain"
+            className="opacity-50"
+          />
+        </div>
+        <div className="absolute bottom-5 right-0 w-60 h-60 sm:w-52 sm:h-36 lg:w-72 lg:h-72">
+          <Image
+            src="/images/nurse-casual.png"
+            alt="Nurse Casual"
+            layout="fill"
+            objectFit="contain"
+            className="opacity-50"
+          />
+        </div>
+        <div className="absolute right-24 bottom-72 transform -translate-x-1/2 top-1/4 w-28 h-28 sm:w-32 sm:h-32 lg:w-36 lg:h-36 sm:top-1/8">
+          <Image
+            src="/images/stethoscope.png"
+            alt="Stethoscope"
+            layout="fill"
+            objectFit="contain"
+            className="opacity-50"
+          />
+        </div>
+        <div className="absolute left-36 transform -translate-x-1/2 bottom-48 w-28 h-28 sm:w-32 sm:h-32 lg:w-36 lg:h-36 sm:top-3/4">
+          <Image
+            src="/images/blue-stethoscope.png"
+            alt="Blue Stethoscope"
+            layout="fill"
+            objectFit="contain"
+            className="opacity-75"
+          />
+        </div>
+      </div>
+
+      <div className="relative max-w-7xl mx-auto text-center z-10">
         <h1 className="text-4xl font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
           Welcome to the Quiz App!
         </h1>
