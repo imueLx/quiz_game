@@ -23,7 +23,7 @@ const Leaderboards = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-white flex flex-col items-center py-8 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-blue-200 flex flex-col items-center py-8 px-4 sm:px-6 lg:px-8">
       <h1 className="text-4xl font-extrabold text-gray-900 mb-8">
         Top Performers
       </h1>
