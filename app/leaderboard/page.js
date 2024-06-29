@@ -2,12 +2,15 @@
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 import { getScores } from "../../_actions/scoreAction";
 import { BiStar } from "react-icons/bi";
 import { FaMedal } from "react-icons/fa";
 
 const Leaderboards = () => {
   const [leaderboardData, setLeaderboardData] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchScores = async () => {
@@ -16,6 +19,8 @@ const Leaderboards = () => {
         setLeaderboardData(response.scores);
       } catch (error) {
         console.error("Error fetching scores:", error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -36,52 +41,69 @@ const Leaderboards = () => {
             <span>Mode</span>
           </div>
           <ul className="divide-y divide-gray-300 max-h-96 overflow-y-auto">
-            {leaderboardData.slice(0, 10).map((item, index) => (
-              <li
-                key={index}
-                className={`px-6 py-4 grid grid-cols-4 gap-4 items-center text-center ${
-                  index === 0
-                    ? "bg-yellow-100 font-bold text-xl"
-                    : index === 1
-                    ? "bg-gray-100 font-semibold"
-                    : index === 2
-                    ? "bg-gray-200"
-                    : "bg-white"
-                }`}
-              >
-                <div className="flex justify-center items-center space-x-2">
-                  {index < 3 && (
-                    <FaMedal
-                      className={`${
-                        index === 0
-                          ? "text-yellow-500"
-                          : index === 1
-                          ? "text-gray-500"
-                          : "text-orange-500"
-                      }`}
-                    />
-                  )}
-                  <span className="text-lg">{index + 1}</span>
-                </div>
-                <div className="text-lg">{item.nickname}</div>
-                <div className="text-lg text-gray-700">{item.score}</div>
-                <div className="text-lg flex justify-center items-center">
-                  {item.difficulty === "easy" ? (
-                    <span className="text-green-500 flex items-center">
-                      <BiStar className="mr-1" />
-                      Easy
-                    </span>
-                  ) : item.difficulty === "hard" ? (
-                    <span className="text-red-500 flex items-center">
-                      <BiStar className="mr-1" />
-                      Hard
-                    </span>
-                  ) : (
-                    <span className="text-gray-500">Unknown</span>
-                  )}
-                </div>
-              </li>
-            ))}
+            {loading
+              ? Array(10)
+                  .fill()
+                  .map((_, index) => (
+                    <li
+                      key={index}
+                      className="px-6 py-4 grid grid-cols-4 gap-4 items-center text-center bg-white"
+                    >
+                      <div className="flex justify-center items-center space-x-2">
+                        <Skeleton width={30} height={30} />
+                        <Skeleton width={20} />
+                      </div>
+                      <Skeleton width={100} />
+                      <Skeleton width={60} />
+                      <Skeleton width={60} />
+                    </li>
+                  ))
+              : leaderboardData.slice(0, 10).map((item, index) => (
+                  <li
+                    key={index}
+                    className={`px-6 py-4 grid grid-cols-4 gap-4 items-center text-center ${
+                      index === 0
+                        ? "bg-yellow-100 font-bold text-xl"
+                        : index === 1
+                        ? "bg-gray-100 font-semibold"
+                        : index === 2
+                        ? "bg-gray-200"
+                        : "bg-white"
+                    }`}
+                  >
+                    <div className="flex justify-center items-center space-x-2">
+                      {index < 3 && (
+                        <FaMedal
+                          className={`${
+                            index === 0
+                              ? "text-yellow-500"
+                              : index === 1
+                              ? "text-gray-500"
+                              : "text-orange-500"
+                          }`}
+                        />
+                      )}
+                      <span className="text-lg">{index + 1}</span>
+                    </div>
+                    <div className="text-lg">{item.nickname}</div>
+                    <div className="text-lg text-gray-700">{item.score}</div>
+                    <div className="text-lg flex justify-center items-center">
+                      {item.difficulty === "easy" ? (
+                        <span className="text-green-500 flex items-center">
+                          <BiStar className="mr-1" />
+                          Easy
+                        </span>
+                      ) : item.difficulty === "hard" ? (
+                        <span className="text-red-500 flex items-center">
+                          <BiStar className="mr-1" />
+                          Hard
+                        </span>
+                      ) : (
+                        <span className="text-gray-500">Unknown</span>
+                      )}
+                    </div>
+                  </li>
+                ))}
           </ul>
         </div>
       </div>
