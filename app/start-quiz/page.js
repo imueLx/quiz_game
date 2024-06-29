@@ -129,7 +129,7 @@ const StartQuizPage = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-r from-teal-400 to-blue-400 p-6">
+    <div className="relative z-10 flex flex-col items-center justify-center min-h-screen py-16 px-4 sm:px-6 lg:px-8">
       <ToastContainer />
       <audio ref={audioRef} src="/background-music-quiz.mp3" loop />
       {isQuizStarted && (
