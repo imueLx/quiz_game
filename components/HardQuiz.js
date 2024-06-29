@@ -196,7 +196,7 @@ const HardQuiz = ({ questions, onFinish, setNumber, mode }) => {
   const modeDisplayName = mode.charAt(0).toUpperCase() + mode.slice(1);
 
   return (
-    <div className="relative max-w-4xl w-full bg-gray-100 rounded-lg shadow-lg p-6 sm:py-8 sm:px-12 space-y-6 overflow-y-auto max-h-[calc(100vh-2rem)]">
+    <div className="relative max-w-4xl w-full bg-gray-100 rounded-lg shadow-lg p-6 sm:py-8 sm:px-12 space-y-6 overflow-y-auto max-h-screen">
       <ToastContainer />
       <div className="flex justify-between items-center mb-4">
         <div className="text-lg font-semibold text-gray-700">

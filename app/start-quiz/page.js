@@ -129,7 +129,7 @@ const StartQuizPage = () => {
   };
 
   return (
-    <div className="relative z-10 flex flex-col items-center justify-center min-h-screen py-16 px-4 sm:px-6 lg:px-8">
+    <div className="relative z-10 flex flex-col min-h-screen h-full overflow-auto py-16 px-4 sm:px-6 lg:px-8">
       <ToastContainer />
       <audio ref={audioRef} src="/background-music-quiz.mp3" loop />
       {isQuizStarted && (
@@ -140,61 +140,62 @@ const StartQuizPage = () => {
           {isMuted ? <FaVolumeMute /> : <FaVolumeUp />}
         </button>
       )}
-      {isNicknameEntered ? (
-        loading ? (
-          <div className="flex items-center justify-center h-screen">
-            <div className="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center">
-              <p className="text-xl font-semibold text-gray-800">
-                {level === "99"
-                  ? "Loading Special Set Questions..."
-                  : `Loading Set ${level} Questions...`}
-              </p>
-
-              <div className="mt-4 animate-spin text-4xl text-gray-900">
-                <AiOutlineLoading3Quarters />
+      <div className="flex-grow">
+        {isNicknameEntered ? (
+          loading ? (
+            <div className="flex items-center justify-center h-screen">
+              <div className="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center">
+                <p className="text-xl font-semibold text-gray-800">
+                  {level === "99"
+                    ? "Loading Special Set Questions..."
+                    : `Loading Set ${level} Questions...`}
+                </p>
+                <div className="mt-4 animate-spin text-4xl text-gray-900">
+                  <AiOutlineLoading3Quarters />
+                </div>
               </div>
             </div>
-          </div>
-        ) : questions.length > 0 ? (
-          isQuizFinished ? (
-            <DoneQuiz
-              score={score}
-              questions={questions}
-              handleSubmit={handleSubmit}
-            />
+          ) : questions.length > 0 ? (
+            isQuizFinished ? (
+              <DoneQuiz
+                score={score}
+                questions={questions}
+                handleSubmit={handleSubmit}
+              />
+            ) : (
+              <Suspense fallback={<div>Loading Set {level} Questions...</div>}>
+                {difficulty === "easy" ? (
+                  <Quiz
+                    questions={questions}
+                    setNumber={level}
+                    mode={difficulty}
+                    onFinish={handleFinish}
+                  />
+                ) : (
+                  <HardQuiz
+                    questions={questions}
+                    setNumber={level}
+                    mode={difficulty}
+                    onFinish={handleFinish}
+                  />
+                )}
+              </Suspense>
+            )
           ) : (
-            <Suspense fallback={<div>Loading Set {level} Questions...</div>}>
-              {difficulty === "easy" ? (
-                <Quiz
-                  questions={questions}
-                  setNumber={level}
-                  mode={difficulty}
-                  onFinish={handleFinish}
-                />
-              ) : (
-                <HardQuiz
-                  questions={questions}
-                  setNumber={level}
-                  mode={difficulty}
-                  onFinish={handleFinish}
-                />
-              )}
-            </Suspense>
+            <div>No questions available.</div>
           )
         ) : (
-          <div>No questions available.</div>
-        )
-      ) : (
-        <EnterNickname
-          nickname={nickname}
-          setNickname={setNickname}
-          difficulty={difficulty}
-          setDifficulty={setDifficulty}
-          level={level}
-          setLevel={setLevel}
-          handleNicknameSubmit={handleNicknameSubmit}
-        />
-      )}
+          <EnterNickname
+            nickname={nickname}
+            setNickname={setNickname}
+            difficulty={difficulty}
+            setDifficulty={setDifficulty}
+            level={level}
+            setLevel={setLevel}
+            handleNicknameSubmit={handleNicknameSubmit}
+          />
+        )}
+      </div>
     </div>
   );
 };

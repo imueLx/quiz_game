@@ -5,7 +5,7 @@
 /* globals.css */
 body {
   @apply bg-blue-200 relative min-h-screen;
-  overflow: hidden;
+  overflow: auto;
 }
 
 .bg-images {

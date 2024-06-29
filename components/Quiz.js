@@ -82,7 +82,7 @@ const Quiz = ({ questions, onFinish, setNumber, mode }) => {
   const modeDisplayName = mode.charAt(0).toUpperCase() + mode.slice(1);
 
   return (
-    <div className="relative max-w-4xl w-full bg-white rounded-lg shadow-md p-6 sm:py-8 sm:px-12 space-y-4 overflow-y-auto max-h-[calc(100vh-2rem)]">
+    <div className="relative max-w-4xl w-full bg-white rounded-lg shadow-md p-6 sm:py-8 sm:px-12 space-y-4 overflow-y-auto max-h-screen">
       <div className="flex justify-between items-center mb-4">
         <div className="text-lg font-semibold text-gray-800">
           Question {currentQuestionIndex + 1}/{questions.length}
@@ -122,7 +122,7 @@ const Quiz = ({ questions, onFinish, setNumber, mode }) => {
                   ? "bg-blue-500 text-white"
                   : "bg-gray-100 text-gray-900 hover:bg-gray-200"
               }`}
-              disabled={isChecked} // Disable buttons after checking the answer
+              disabled={isChecked}
             >
               {option}
             </button>
@@ -141,7 +141,7 @@ const Quiz = ({ questions, onFinish, setNumber, mode }) => {
           <button
             onClick={handleCheckAnswer}
             className="text-yellow-500 hover:text-yellow-600 transition duration-200"
-            disabled={checked} // Disable "Hint" button after checking the answer
+            disabled={checked}
           >
             <FaLightbulb size={24} />
           </button>
