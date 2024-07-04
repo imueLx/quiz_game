@@ -22,12 +22,12 @@ const StartQuizPage = () => {
   const [isNicknameEntered, setIsNicknameEntered] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
   const [isQuizStarted, setIsQuizStarted] = useState(false);
-  const [loading, setLoading] = useState(true); // New loading state
+  const [loading, setLoading] = useState(true);
   const audioRef = useRef(null);
 
   useEffect(() => {
     const fetchQuestions = async () => {
-      setLoading(true); // Set loading to true when fetching starts
+      setLoading(true);
       try {
         let response;
         if (difficulty === "hard") {
@@ -39,7 +39,7 @@ const StartQuizPage = () => {
       } catch (error) {
         console.error("Error fetching questions:", error);
       } finally {
-        setLoading(false); // Set loading to false when fetching ends
+        setLoading(false);
       }
     };
 
@@ -55,7 +55,7 @@ const StartQuizPage = () => {
           audioRef.current.play();
         }
       }, 1500);
-      return () => clearTimeout(timer); // Clean up the timeout if the component unmounts or dependencies change
+      return () => clearTimeout(timer);
     }
   }, [isQuizStarted]);
 
@@ -129,7 +129,7 @@ const StartQuizPage = () => {
   };
 
   return (
-    <div className="relative z-10 flex flex-col min-h-screen h-full overflow-auto py-16 px-4 sm:px-6 lg:px-8">
+    <div className="relative z-10 flex flex-col items-center justify-center min-h-screen h-full overflow-auto py-16 px-4 sm:px-6 lg:px-8">
       <ToastContainer />
       <audio ref={audioRef} src="/background-music-quiz.mp3" loop />
       {isQuizStarted && (
@@ -140,7 +140,7 @@ const StartQuizPage = () => {
           {isMuted ? <FaVolumeMute /> : <FaVolumeUp />}
         </button>
       )}
-      <div className="flex-grow">
+      <div className="w-full flex-grow flex flex-col items-center justify-center">
         {isNicknameEntered ? (
           loading ? (
             <div className="flex items-center justify-center h-screen">
